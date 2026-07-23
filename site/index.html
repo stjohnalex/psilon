@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Psilon — Run any model on any machine</title>
+  <meta name="description" content="Psilon democratizes AI access by porting PyTorch to open GPU standards — Vulkan, DirectX 12, and WebGPU — and streaming frontier-scale models on ordinary consumer hardware." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <span class="brand"><span class="logo-mark"><svg class="glyph" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 12 V88 M22 18 v24 a28 28 0 0 0 56 0 V18" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round"/></svg></span><span class="brand-name nav-wordmark">Psilon</span></span>
+      <nav class="nav-links">
+        <a href="#psitorch">psiTorch</a>
+        <a href="#psicache">psiCache</a>
+        <a href="#libraries">Libraries</a>
+        <a href="#downloads">Downloads</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="logo-hero"><span class="logo-mark xl"><svg class="glyph" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 12 V88 M22 18 v24 a28 28 0 0 0 56 0 V18" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round"/></svg></span><span class="brand-name hero-wordmark">Psilon</span></div>
+      <h1>Run any model on any machine.</h1>
+      <p class="lede">
+        Psilon democratizes AI access for consumers. It removes the NVIDIA ecosystem
+        dependency from AI by porting PyTorch to open, standardized GPU APIs —
+        <strong>Vulkan</strong>, <strong>DirectX&nbsp;12</strong>, and <strong>WebGPU</strong> —
+        and it makes frontier-scale models runnable, unmodified, on ordinary consumer
+        gaming hardware.
+      </p>
+      <div class="hero-badges">
+        <span class="badge">Vulkan</span>
+        <span class="badge">DirectX 12</span>
+        <span class="badge">WebGPU</span>
+        <span class="badge">CUDA-compatible</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="mission">
+    <div class="container">
+      <h2>Why Psilon exists</h2>
+      <p>
+        Today, serious frontier AI models run on one vendor's hardware, through one vendor's software
+        stack. If your GPU doesn't speak CUDA — or your model doesn't fit in your VRAM —
+        you're locked out. Psilon enables everyone to participate in the singularity.
+      </p>
+      <div class="grid two">
+        <div class="card">
+          <h3>Open the hardware</h3>
+          <p>
+            A highly optimized PyTorch backend for Vulkan, DX12, and WebGPU that aims to
+            match or exceed CUDA performance on the same silicon. AMD, Intel, NVIDIA,
+            Apple, and the browser — one model, every GPU.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Break the VRAM ceiling</h3>
+          <p>
+            General-purpose <strong>AI model streaming</strong>: frontier models run in
+            their unmodified entirety on low-cost hardware by streaming layers through
+            the GPU instead of holding the whole model in VRAM.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="psitorch">
+    <div class="container">
+      <p class="kicker">First release · Pillar 1</p>
+      <h2>psiTorch — PyTorch on open GPU standards</h2>
+      <p>
+        psiTorch is a highly optimized PyTorch library and backend for Vulkan,
+        DirectX&nbsp;12, and WebGPU. It keeps the PyTorch name and API surface, so
+        existing models and code run unchanged — <code>torch.device("vulkan")</code>
+        works the way you'd expect.
+      </p>
+      <p>
+        The Vulkan port is often <strong>as fast or faster than CUDA on the same
+        hardware</strong> — and it is positioned to pull further ahead as new drivers
+        expose more tensor-core primitives to Vulkan and DX12.
+      </p>
+
+      <h3>Measured today</h3>
+      <table class="perf">
+        <thead>
+          <tr><th>Operation</th><th>Vulkan vs. best CUDA</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>torch.mm</code></td><td class="gold">1.49&times; faster</td></tr>
+          <tr><td><code>torch.matmul</code></td><td class="gold">1.45&times; faster</td></tr>
+          <tr><td><code>F.nll_loss</code></td><td class="gold">1.0&times; (parity)</td></tr>
+          <tr><td>NVMe&rarr;GPU weight streaming</td><td class="gold">11&nbsp;GB/s</td></tr>
+        </tbody>
+      </table>
+      <p class="footnote">
+        Ratios vs. <code>torch.compile(mode="max-autotune")</code> + cuDNN SDPA on an
+        RTX&nbsp;5090 Laptop GPU, Windows. Coverage is expanding: these are targeted
+        AI-critical operators, not yet the full operator surface.
+      </p>
+
+      <div class="grid three">
+        <div class="card small">
+          <h4>Full operator surface</h4>
+          <p>2,691 ATen operator registrations, with matrix-core acceleration (tensor
+          cores, AMD WMMA, Intel XMX) and automatic hardware tier detection.</p>
+        </div>
+        <div class="card small">
+          <h4>One shader source</h4>
+          <p>A single shader codebase compiles to SPIR-V for Vulkan, DXIL for
+          DirectX&nbsp;12, and WGSL for WebGPU.</p>
+        </div>
+        <div class="card small">
+          <h4>Training included</h4>
+          <p>Not inference-only. psiTorch targets the full PyTorch experience —
+          training and inference — on open APIs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="psicache">
+    <div class="container">
+      <p class="kicker">First release · Pillar 2</p>
+      <h2>psiCache — stream frontier models on consumer hardware</h2>
+      <p>
+        Streaming an AI model does <strong>not</strong> require quantizing it, pruning
+        it, or otherwise cutting it down to fit in limited VRAM. It is a new technique
+        for processing frontier models <em>in their unmodified entirety</em> on modest
+        consumer hardware. They may not be fast — but they work, today, uncompromised.
+      </p>
+
+      <h3>How it works</h3>
+      <ol class="steps">
+        <li>
+          <strong>Compile-time profiling.</strong> psiCache sits in the PyTorch compiler.
+          During compilation it captures metadata about the model's structure and access
+          patterns and builds a <em>proactive caching profile</em>.
+        </li>
+        <li>
+          <strong>Adaptive execution.</strong> When the model runs on arbitrary hardware,
+          psiCache uses that profile to optimize itself for the machine it lands on —
+          orchestrating VRAM, CPU RAM, and NVMe as a unified cache hierarchy.
+        </li>
+        <li>
+          <strong>Layer-by-layer streaming.</strong> Arbitrarily large models stream
+          through the GPU one layer at a time, with prefetch running ahead of compute.
+          The entire model never needs to be resident in VRAM at once.
+        </li>
+      </ol>
+
+      <div class="callout">
+        <p>
+          <strong>Streaming and quantization are complementary, not competing.</strong>
+          Combine psiCache streaming with familiar quantization techniques to raise
+          tokens-per-second — or run the full-precision original when fidelity matters.
+          The point is that the choice is finally yours.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="libraries">
+    <div class="container">
+      <p class="kicker">First release · Pillar 3</p>
+      <h2>Fused Hugging Face libraries</h2>
+      <p>
+        Psilon ships a family of the top Hugging Face AI Python libraries — fused and
+        optimized to perform better on <strong>CUDA, Vulkan, DX12, and WebGPU</strong>
+        alike. High-overhead Python paths in the standard libraries are replaced with
+        fused native GPU implementations, so the ecosystem you already use gets faster
+        on every backend, including CUDA.
+      </p>
+      <div class="grid two">
+        <div class="card">
+          <h3>Drop-in ecosystem</h3>
+          <p>Keep your <code>transformers</code>-style workflows. The fused libraries
+          preserve the familiar APIs while eliminating interpreter overhead on the hot
+          path.</p>
+        </div>
+        <div class="card">
+          <h3>Every backend wins</h3>
+          <p>Fusion benefits aren't limited to the new backends — the same optimizations
+          accelerate CUDA too. There is no penalty for coming along.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="vision">
+    <div class="container narrow center">
+      <h2>AI as a first-class streamable media type</h2>
+      <p class="lede">
+        Video didn't become universal because everyone bought broadcast equipment — it
+        became universal because it became streamable. Psilon does the same for AI
+        models: any model, streamed to any machine, on open standards.
+      </p>
+      <p class="lede">
+        By transforming AI into a streamable consumer media type, Psilon enables
+        <strong>everyone</strong> to participate in the singularity. AI is no longer a
+        monopoly for a few big companies to define or control.
+      </p>
+    </div>
+  </section>
+
+  <section class="section alt" id="downloads">
+    <div class="container">
+      <p class="kicker">Get Psilon</p>
+      <h2>Downloads</h2>
+      <p>
+        Signed Windows builds are published on GitHub Releases. Every release
+        includes a <code>SHA256SUMS.txt</code> covering all assets, so you can
+        verify what you download.
+      </p>
+      <div class="grid three">
+        <div class="card small">
+          <h4>Latest release</h4>
+          <p>Grab the newest signed build.<br /><a href="https://github.com/stjohnalex/psilon/releases/latest" target="_blank" rel="noopener">github.com/stjohnalex/psilon/releases</a></p>
+        </div>
+        <div class="card small">
+          <h4>Verify your download</h4>
+          <p>Check the <code>SHA256SUMS.txt</code> attached to each release against your files before running anything.</p>
+        </div>
+        <div class="card small">
+          <h4>Open source</h4>
+          <p>Open-source components land in the repository as they are reviewed.<br /><a href="https://github.com/stjohnalex/psilon" target="_blank" rel="noopener">github.com/stjohnalex/psilon</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>
+        Psilon is under active vibe development. Mac and Linux versions will be
+        available soon as well as additional opensource as soon as I get a chance
+        to personally review the code. The best place to reach me personally for
+        business contact is via LinkedIn, or via Discord if you just want to join
+        the revolution and help support the project.
+      </p>
+      <div class="grid three">
+        <div class="card small">
+          <h4>LinkedIn</h4>
+          <p>Connect with Alex St. John.<br /><a href="https://www.linkedin.com/in/alexstjohn/" target="_blank" rel="noopener">linkedin.com/in/alexstjohn</a></p>
+        </div>
+        <div class="card small">
+          <h4>YouTube</h4>
+          <p>Watch demos and deep dives.<br /><a href="https://www.youtube.com/@Playcastio" target="_blank" rel="noopener">youtube.com/@Playcastio</a></p>
+        </div>
+        <div class="card small">
+          <h4>Playcast</h4>
+          <p>Visit the Playcast site.<br /><a href="https://playcast.io" target="_blank" rel="noopener">playcast.io</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="brand"><span class="logo-mark"><svg class="glyph" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 12 V88 M22 18 v24 a28 28 0 0 0 56 0 V18" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round"/></svg></span><span class="brand-name">Psilon</span></span>
+      <p>Any model. Any machine. Open standards.</p>
+      <p class="fine">psiTorch builds on PyTorch and remains compatible with the PyTorch API.
+      PyTorch is a trademark of The Linux Foundation. Hugging Face is a trademark of Hugging Face, Inc.</p>
+    </div>
+  </footer>
+
+  <script>
+    const heroLockup = document.querySelector(".logo-hero");
+    const navBar = document.querySelector(".nav");
+    new IntersectionObserver(([entry]) => {
+      navBar.classList.toggle("scrolled", !entry.isIntersecting);
+    }).observe(heroLockup);
+  </script>
+
+</body>
+</html>
