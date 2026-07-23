@@ -1,15 +1,25 @@
 :root {
-  --bg: #140b0d;
-  --bg-alt: #1a0f11;
-  --surface: #241417;
-  --border: #3a1f24;
-  --text: #f0e7e6;
-  --text-dim: #b2a09e;
+  /* Space-black gunmetal base — deep neutral darks, red reserved for the Cylon eye */
+  --bg: #0b0d11;
+  --bg-alt: #10131a;
+  --surface: #161a22;
+  --border: #272d38;
+  --text: #e9edf2;
+  --text-dim: #a2aab6;
   --accent: #ff3b4e;
-  --accent-soft: rgba(255, 59, 78, 0.13);
+  --accent-soft: rgba(255, 59, 78, 0.12);
   --ember: #ff7a45;
   --gold: #f2b84b;
+  --chrome-hi: #f6f8fb;
+  --chrome-mid: #aeb6c2;
+  --chrome-lo: #4d5560;
   --max: 1080px;
+}
+
+@font-face {
+  font-family: "Battlestar";
+  src: url("fonts/Battlestar.ttf") format("truetype");
+  font-display: swap;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,9 +49,10 @@ code {
 /* Nav */
 .nav {
   position: sticky; top: 0; z-index: 10;
-  background: rgba(20, 11, 13, 0.85);
+  background: rgba(11, 13, 17, 0.85);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent, rgba(190, 200, 215, 0.45), transparent) 1;
 }
 .nav-inner {
   display: flex; align-items: center; justify-content: space-between;
@@ -59,27 +70,30 @@ code {
 .brand-name {
   position: relative;
   display: inline-block;
+  font-family: "Battlestar", "Segoe UI", system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.04em;
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
   background-image:
-    radial-gradient(circle at 50% 65%, #ffb9ad 0%, #ff2231 38%, rgba(255, 34, 49, 0) 70%),
-    radial-gradient(ellipse 60% 140% at 50% 50%, #e04250 0%, #b62334 55%, #4a1019 85%, #1c0609 100%);
-  background-size: 20% 100%, 100% 100%;
+    radial-gradient(ellipse 50% 60% at 50% 50%, #ffb9ad 0%, #ff2231 42%, rgba(255, 34, 49, 0) 100%),
+    radial-gradient(ellipse 52% 130% at 50% 50%, #dc1440 0%, #a80d2f 42%, #520718 74%, #1d0309 92%, #0e0105 100%);
+  background-size: 30% 100%, 100% 100%;
   background-repeat: no-repeat;
   background-position: -25% 0, 0 0;
-  animation: text-scan 2.6s ease-in-out infinite;
+  animation: text-scan 2.86s ease-in-out infinite;
 }
 @keyframes text-scan {
-  0%   { background-position: -25% 0, 0 0; }
-  50%  { background-position: 125% 0, 0 0; }
-  100% { background-position: -25% 0, 0 0; }
+  0%   { background-position: 0% 0, 0 0; }
+  50%  { background-position: 100% 0, 0 0; }
+  100% { background-position: 0% 0, 0 0; }
 }
 /* Faint ambient halo that just kisses the edges of the letterforms */
 .brand-name::after {
   content: "";
   position: absolute;
-  top: 65%;
+  top: 50%;
   left: -5%;
   aspect-ratio: 1;
   height: 115%;
@@ -91,15 +105,15 @@ code {
     rgba(255, 45, 60, 0) 70%);
   filter: blur(3px);
   pointer-events: none;
-  animation: halo-scan 2.6s ease-in-out infinite;
+  animation: halo-scan 2.86s ease-in-out infinite;
 }
 @keyframes halo-scan {
-  0%   { left: -5%; }
-  50%  { left: 105%; }
-  100% { left: -5%; }
+  0%   { left: 10%; }
+  50%  { left: 90%; }
+  100% { left: 10%; }
 }
 
-/* Logo mark — inverted: red tile, black psi */
+/* Logo mark — polished Cylon chrome tile, gunmetal psi glyph */
 .logo-mark {
   position: relative;
   display: inline-flex;
@@ -108,41 +122,102 @@ code {
   width: 34px;
   height: 34px;
   border-radius: 9px;
-  overflow: hidden;
-  background: linear-gradient(160deg, #ff6b5e 0%, #e0233a 55%, #97121f 100%);
-  border: 1px solid rgba(255, 120, 110, 0.5);
+  background: linear-gradient(165deg,
+    #ffffff 0%,
+    #dde2e9 16%,
+    #a8b0bb 34%,
+    #626a76 50%,
+    #343a44 62%,
+    #59616c 80%,
+    #9aa2ad 94%,
+    #cfd5dd 100%);
+  border: 1px solid rgba(214, 222, 232, 0.55);
   box-shadow:
-    0 0 14px rgba(255, 59, 78, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -6px 12px rgba(0, 0, 0, 0.3);
+    0 0 12px rgba(170, 195, 230, 0.35),
+    0 0 22px rgba(255, 59, 78, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.5);
 }
-.logo-mark .glyph {
-  width: 66%;
-  height: 66%;
+/* Passing specular sheen — light sweeping over the armor */
+.logo-mark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  background: linear-gradient(115deg,
+    transparent 32%,
+    rgba(255, 255, 255, 0.0) 40%,
+    rgba(255, 255, 255, 0.75) 48%,
+    rgba(255, 255, 255, 0.0) 56%,
+    transparent 64%);
+  background-size: 300% 100%;
+  background-repeat: no-repeat;
+  background-position: 120% 0;
+  animation: chrome-sheen 60s ease-in-out infinite;
+  pointer-events: none;
+}
+/* Sheen rests for ~58s, then sweeps across in ~1.5s */
+@keyframes chrome-sheen {
+  0%, 97%    { background-position: 120% 0; }
+  99.5%, 100% { background-position: -75% 0; }
+}
+/* Psi built from the font's own U (bowl) and I (stem) outlines, composed as one SVG.
+   Masks let each letter's stripe gap punch through the other where they intersect. */
+.logo-mark .psi-svg {
   display: block;
-  color: #12060a;
+  height: 23px;
+  width: auto;
+  color: #dc1440;
 }
+.logo-mark.xl .psi-svg { height: 58px; }
 .logo-mark.xl {
   width: 84px;
   height: 84px;
   border-radius: 22px;
   box-shadow:
-    0 0 44px rgba(255, 59, 78, 0.6),
-    0 0 120px rgba(255, 122, 69, 0.25),
-    inset 0 2px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -14px 28px rgba(0, 0, 0, 0.35);
+    0 0 34px rgba(175, 200, 235, 0.4),
+    0 0 90px rgba(255, 59, 78, 0.16),
+    inset 0 2px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -14px 28px rgba(0, 0, 0, 0.55);
 }
 .logo-hero {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 24px;
   margin-bottom: 30px;
 }
+/* Lens flare anchored to the hero tile's upper-left corner:
+   bright core + four-point star + long anamorphic horizontal streak */
+.logo-mark.xl::after {
+  content: "";
+  position: absolute;
+  width: 460px;
+  height: 150px;
+  left: 7px;
+  top: 7px;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 1) 0%, rgba(222, 236, 255, 0.5) 4%, rgba(210, 228, 255, 0) 10%),
+    linear-gradient(0deg, transparent 49.4%, rgba(255, 255, 255, 0.85) 50%, transparent 50.6%) 50% 50% / 34% 100% no-repeat,
+    linear-gradient(90deg, transparent 49%, rgba(255, 255, 255, 0.9) 50%, transparent 51%) 50% 50% / 100% 90% no-repeat,
+    radial-gradient(ellipse 50% 3% at 50% 50%, rgba(185, 213, 255, 0.85) 0%, rgba(170, 205, 255, 0.25) 55%, transparent 100%);
+  filter: blur(0.4px);
+  animation: glint 60s ease-in-out infinite;
+  pointer-events: none;
+}
+/* Flare brightens in sync with the sheen sweep once a minute */
+@keyframes glint {
+  0%, 96.5%, 100% { opacity: 0.45; transform: translate(-50%, -50%) scale(0.82); }
+  98.25%          { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
 .hero-wordmark {
-  font-size: clamp(3.2rem, 9vw, 5.5rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.6rem, 7.5vw, 4.6rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
   line-height: 1.1;
 }
 .nav-links a {
@@ -168,9 +243,24 @@ code {
 .hero {
   padding: 96px 0 72px;
   background:
-    radial-gradient(ellipse 70% 50% at 50% -10%, var(--accent-soft), transparent),
+    radial-gradient(ellipse 70% 50% at 50% -10%, rgba(165, 190, 230, 0.09), transparent),
+    radial-gradient(ellipse 45% 35% at 50% 8%, rgba(255, 59, 78, 0.06), transparent),
     var(--bg);
   text-align: center;
+}
+/* Chrome headline text — bright crown, dark horizon, lifted base */
+.hero h1, .section h2 {
+  background-image: linear-gradient(180deg,
+    #ffffff 0%,
+    #e3e8ee 36%,
+    #b7bfc9 49%,
+    #737d8a 53%,
+    #aeb6c1 62%,
+    #dfe4ea 82%,
+    #f4f6f9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 .hero h1 {
   font-size: clamp(2.2rem, 5.5vw, 3.6rem);
@@ -188,8 +278,11 @@ code {
 .hero-badges { margin-top: 28px; }
 .badge {
   display: inline-block;
-  border: 1px solid var(--border);
-  background: var(--surface);
+  border: 1px solid rgba(174, 182, 194, 0.35);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 45%),
+    var(--surface);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
   border-radius: 999px;
   padding: 6px 16px;
   margin: 4px;
@@ -199,7 +292,12 @@ code {
 
 /* Sections */
 .section { padding: 80px 0; }
-.section.alt { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.section.alt {
+  background: var(--bg-alt);
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent, rgba(190, 200, 215, 0.4), transparent) 1;
+}
 .section h2 {
   font-size: clamp(1.6rem, 3.5vw, 2.2rem);
   letter-spacing: -0.01em;
@@ -226,6 +324,7 @@ code {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 26px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 .card h3, .card h4 { margin: 0 0 10px; }
 .card p { margin: 0; font-size: 0.98rem; }
@@ -276,7 +375,8 @@ code {
 
 /* Footer */
 .footer {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent, rgba(190, 200, 215, 0.4), transparent) 1;
   padding: 48px 0;
   text-align: center;
 }
@@ -287,4 +387,5 @@ code {
   .nav-links a { margin-left: 14px; font-size: 0.85rem; }
   .hero { padding: 64px 0 48px; }
   .section { padding: 56px 0; }
+  .logo-mark.xl::after { display: none; }
 }

@@ -5,18 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Psilon — Run any model on any machine</title>
   <meta name="description" content="Psilon democratizes AI access by porting PyTorch to open GPU standards — Vulkan, DirectX 12, and WebGPU — and streaming frontier-scale models on ordinary consumer hardware." />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=2" />
 </head>
 <body>
 
   <header class="nav">
     <div class="container nav-inner">
-      <span class="brand"><span class="logo-mark"><svg class="glyph" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 12 V88 M22 18 v24 a28 28 0 0 0 56 0 V18" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round"/></svg></span><span class="brand-name nav-wordmark">Psilon</span></span>
+      <span class="brand"><span class="logo-mark"><svg class="glyph psi-svg" viewBox="0 0 634.5 812" aria-hidden="true"><defs><mask id="psiCutUNav"><rect width="634.5" height="812" fill="#fff"/><rect x="308.6" y="0" width="19.5" height="812" fill="#000"/></mask><mask id="psiCutINav"><rect width="634.5" height="812" fill="#fff"/><rect x="0" y="486.0" width="634.5" height="18.0" fill="#000"/></mask></defs><path d="M6.0 146.0L6.0 345.0Q14.2 409.5 43.5 456.0Q113.2 567.0 317.6 567.0Q521.2 567.0 591.0 456.0Q620.2 409.5 628.5 344.2L628.5 146.0L558.0 146.0L558.0 312.8Q555.0 368.2 534.8 408.8Q486.0 504.0 317.6 504.0Q149.2 504.0 100.5 411.0Q80.2 372.0 77.2 318.0L77.2 146.0ZM96.8 146.0L165.8 146.0L165.8 306.8Q167.2 341.2 178.5 366.0Q206.2 426.0 317.6 426.8Q426.0 427.5 453.0 367.5Q464.2 342.0 466.5 306.8L466.5 146.0L537.0 146.0L537.8 327.0Q532.5 373.5 513.8 406.5Q467.2 486.0 317.6 486.0Q167.2 486.0 121.5 409.5Q102.0 378.0 96.8 333.0Z" fill="currentColor" mask="url(#psiCutUNav)"/><path d="M237.4 806L237.4 6L308.6 6L308.6 806ZM328.1 806L328.1 6L397.1 6L397.1 806Z" fill="currentColor" mask="url(#psiCutINav)"/></svg></span><span class="brand-name nav-wordmark">Psilon.ai</span></span>
       <nav class="nav-links">
         <a href="#psitorch">psiTorch</a>
         <a href="#psicache">psiCache</a>
         <a href="#libraries">Libraries</a>
-        <a href="#downloads">Downloads</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -24,7 +23,7 @@
 
   <section class="hero">
     <div class="container">
-      <div class="logo-hero"><span class="logo-mark xl"><svg class="glyph" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 12 V88 M22 18 v24 a28 28 0 0 0 56 0 V18" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round"/></svg></span><span class="brand-name hero-wordmark">Psilon</span></div>
+      <div class="logo-hero"><span class="logo-mark xl"><svg class="glyph psi-svg" viewBox="0 0 634.5 812" aria-hidden="true"><defs><mask id="psiCutUHero"><rect width="634.5" height="812" fill="#fff"/><rect x="308.6" y="0" width="19.5" height="812" fill="#000"/></mask><mask id="psiCutIHero"><rect width="634.5" height="812" fill="#fff"/><rect x="0" y="486.0" width="634.5" height="18.0" fill="#000"/></mask></defs><path d="M6.0 146.0L6.0 345.0Q14.2 409.5 43.5 456.0Q113.2 567.0 317.6 567.0Q521.2 567.0 591.0 456.0Q620.2 409.5 628.5 344.2L628.5 146.0L558.0 146.0L558.0 312.8Q555.0 368.2 534.8 408.8Q486.0 504.0 317.6 504.0Q149.2 504.0 100.5 411.0Q80.2 372.0 77.2 318.0L77.2 146.0ZM96.8 146.0L165.8 146.0L165.8 306.8Q167.2 341.2 178.5 366.0Q206.2 426.0 317.6 426.8Q426.0 427.5 453.0 367.5Q464.2 342.0 466.5 306.8L466.5 146.0L537.0 146.0L537.8 327.0Q532.5 373.5 513.8 406.5Q467.2 486.0 317.6 486.0Q167.2 486.0 121.5 409.5Q102.0 378.0 96.8 333.0Z" fill="currentColor" mask="url(#psiCutUHero)"/><path d="M237.4 806L237.4 6L308.6 6L308.6 806ZM328.1 806L328.1 6L397.1 6L397.1 806Z" fill="currentColor" mask="url(#psiCutIHero)"/></svg></span><span class="brand-name hero-wordmark">Psilon.ai</span></div>
       <h1>Run any model on any machine.</h1>
       <p class="lede">
         Psilon democratizes AI access for consumers. It removes the NVIDIA ecosystem
@@ -209,33 +208,7 @@
     </div>
   </section>
 
-  <section class="section alt" id="downloads">
-    <div class="container">
-      <p class="kicker">Get Psilon</p>
-      <h2>Downloads</h2>
-      <p>
-        Signed Windows builds are published on GitHub Releases. Every release
-        includes a <code>SHA256SUMS.txt</code> covering all assets, so you can
-        verify what you download.
-      </p>
-      <div class="grid three">
-        <div class="card small">
-          <h4>Latest release</h4>
-          <p>Grab the newest signed build.<br /><a href="https://github.com/stjohnalex/psilon/releases/latest" target="_blank" rel="noopener">github.com/stjohnalex/psilon/releases</a></p>
-        </div>
-        <div class="card small">
-          <h4>Verify your download</h4>
-          <p>Check the <code>SHA256SUMS.txt</code> attached to each release against your files before running anything.</p>
-        </div>
-        <div class="card small">
-          <h4>Open source</h4>
-          <p>Open-source components land in the repository as they are reviewed.<br /><a href="https://github.com/stjohnalex/psilon" target="_blank" rel="noopener">github.com/stjohnalex/psilon</a></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="contact">
+  <section class="section alt" id="contact">
     <div class="container">
       <h2>Contact</h2>
       <p>
@@ -251,6 +224,10 @@
           <p>Connect with Alex St. John.<br /><a href="https://www.linkedin.com/in/alexstjohn/" target="_blank" rel="noopener">linkedin.com/in/alexstjohn</a></p>
         </div>
         <div class="card small">
+          <h4>Discord</h4>
+          <p>Join the revolution and support the project.<br /><a href="https://discord.gg/NAQhQdn8t" target="_blank" rel="noopener">discord.gg/NAQhQdn8t</a></p>
+        </div>
+        <div class="card small">
           <h4>YouTube</h4>
           <p>Watch demos and deep dives.<br /><a href="https://www.youtube.com/@Playcastio" target="_blank" rel="noopener">youtube.com/@Playcastio</a></p>
         </div>
@@ -264,7 +241,7 @@
 
   <footer class="footer">
     <div class="container footer-inner">
-      <span class="brand"><span class="logo-mark"><svg class="glyph" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 12 V88 M22 18 v24 a28 28 0 0 0 56 0 V18" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round"/></svg></span><span class="brand-name">Psilon</span></span>
+      <span class="brand"><span class="logo-mark"><svg class="glyph psi-svg" viewBox="0 0 634.5 812" aria-hidden="true"><defs><mask id="psiCutUFoot"><rect width="634.5" height="812" fill="#fff"/><rect x="308.6" y="0" width="19.5" height="812" fill="#000"/></mask><mask id="psiCutIFoot"><rect width="634.5" height="812" fill="#fff"/><rect x="0" y="486.0" width="634.5" height="18.0" fill="#000"/></mask></defs><path d="M6.0 146.0L6.0 345.0Q14.2 409.5 43.5 456.0Q113.2 567.0 317.6 567.0Q521.2 567.0 591.0 456.0Q620.2 409.5 628.5 344.2L628.5 146.0L558.0 146.0L558.0 312.8Q555.0 368.2 534.8 408.8Q486.0 504.0 317.6 504.0Q149.2 504.0 100.5 411.0Q80.2 372.0 77.2 318.0L77.2 146.0ZM96.8 146.0L165.8 146.0L165.8 306.8Q167.2 341.2 178.5 366.0Q206.2 426.0 317.6 426.8Q426.0 427.5 453.0 367.5Q464.2 342.0 466.5 306.8L466.5 146.0L537.0 146.0L537.8 327.0Q532.5 373.5 513.8 406.5Q467.2 486.0 317.6 486.0Q167.2 486.0 121.5 409.5Q102.0 378.0 96.8 333.0Z" fill="currentColor" mask="url(#psiCutUFoot)"/><path d="M237.4 806L237.4 6L308.6 6L308.6 806ZM328.1 806L328.1 6L397.1 6L397.1 806Z" fill="currentColor" mask="url(#psiCutIFoot)"/></svg></span><span class="brand-name">Psilon.ai</span></span>
       <p>Any model. Any machine. Open standards.</p>
       <p class="fine">psiTorch builds on PyTorch and remains compatible with the PyTorch API.
       PyTorch is a trademark of The Linux Foundation. Hugging Face is a trademark of Hugging Face, Inc.</p>
