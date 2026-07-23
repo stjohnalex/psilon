@@ -24,7 +24,7 @@
   <section class="hero">
     <div class="container">
       <div class="logo-hero"><span class="logo-mark xl"><svg class="glyph psi-svg" viewBox="0 0 634.5 812" aria-hidden="true"><defs><mask id="psiCutUHero"><rect width="634.5" height="812" fill="#fff"/><rect x="308.6" y="0" width="19.5" height="812" fill="#000"/></mask><mask id="psiCutIHero"><rect width="634.5" height="812" fill="#fff"/><rect x="0" y="486.0" width="634.5" height="18.0" fill="#000"/></mask></defs><path d="M6.0 146.0L6.0 345.0Q14.2 409.5 43.5 456.0Q113.2 567.0 317.6 567.0Q521.2 567.0 591.0 456.0Q620.2 409.5 628.5 344.2L628.5 146.0L558.0 146.0L558.0 312.8Q555.0 368.2 534.8 408.8Q486.0 504.0 317.6 504.0Q149.2 504.0 100.5 411.0Q80.2 372.0 77.2 318.0L77.2 146.0ZM96.8 146.0L165.8 146.0L165.8 306.8Q167.2 341.2 178.5 366.0Q206.2 426.0 317.6 426.8Q426.0 427.5 453.0 367.5Q464.2 342.0 466.5 306.8L466.5 146.0L537.0 146.0L537.8 327.0Q532.5 373.5 513.8 406.5Q467.2 486.0 317.6 486.0Q167.2 486.0 121.5 409.5Q102.0 378.0 96.8 333.0Z" fill="currentColor" mask="url(#psiCutUHero)"/><path d="M237.4 806L237.4 6L308.6 6L308.6 806ZM328.1 806L328.1 6L397.1 6L397.1 806Z" fill="currentColor" mask="url(#psiCutIHero)"/></svg></span><span class="brand-name hero-wordmark">Psilon.ai</span></div>
-      <h1>Run any model on any machine.</h1>
+      <h1>Run any model on any machine</h1>
       <p class="lede">
         Psilon democratizes AI access for consumers. It removes the NVIDIA ecosystem
         dependency from AI by porting PyTorch to open, standardized GPU APIs —
@@ -43,7 +43,7 @@
 
   <section class="section" id="mission">
     <div class="container">
-      <h2>Why Psilon exists</h2>
+      <h2>A Streaming AI Runtime</h2>
       <p>
         Today, serious frontier AI models run on one vendor's hardware, through one vendor's software
         stack. If your GPU doesn't speak CUDA — or your model doesn't fit in your VRAM —
@@ -55,7 +55,7 @@
           <p>
             A highly optimized PyTorch backend for Vulkan, DX12, and WebGPU that aims to
             match or exceed CUDA performance on the same silicon. AMD, Intel, NVIDIA,
-            Apple, and the browser — one model, every GPU.
+            Apple, and the browser — one model, any GPU.
           </p>
         </div>
         <div class="card">
@@ -118,7 +118,7 @@
         <div class="card small">
           <h4>Training included</h4>
           <p>Not inference-only. psiTorch targets the full PyTorch experience —
-          training and inference — on open APIs.</p>
+          training and inference — all on open APIs.</p>
         </div>
       </div>
     </div>
@@ -145,7 +145,7 @@
         <li>
           <strong>Adaptive execution.</strong> When the model runs on arbitrary hardware,
           psiCache uses that profile to optimize itself for the machine it lands on —
-          orchestrating VRAM, CPU RAM, and NVMe as a unified cache hierarchy.
+          orchestrating VRAM, CPU RAM, and NVMe DirectStorage as a unified cache hierarchy.
         </li>
         <li>
           <strong>Layer-by-layer streaming.</strong> Arbitrarily large models stream
@@ -156,10 +156,15 @@
 
       <div class="callout">
         <p>
-          <strong>Streaming and quantization are complementary, not competing.</strong>
-          Combine psiCache streaming with familiar quantization techniques to raise
-          tokens-per-second — or run the full-precision original when fidelity matters.
-          The point is that the choice is finally yours.
+          <strong>Streaming and quantization are complementary approaches to running AI models on consumer hardware.</strong>
+          psiCache streams and caches AI models to enable models of any scale to run
+          unmodified on consumer hardware. psiCache also supports adaptive quantization
+          of model weights and KV cache values. Because streaming an AI model transforms
+          an inherently compute bound problem into an IO bound problem on consumer
+          hardware, abundant GPU cycles become available for adaptive quantization that
+          enables psiCache to adjust weight and KV values at run-time to achieve a
+          target perplexity goal. No more hand-tuning AI models, psiCache adaptive
+          quantization works with all pyTorch based models out of the box.
         </p>
       </div>
     </div>
@@ -185,8 +190,8 @@
         </div>
         <div class="card">
           <h3>Every backend wins</h3>
-          <p>Fusion benefits aren't limited to the new backends — the same optimizations
-          accelerate CUDA too. There is no penalty for coming along.</p>
+          <p>The same fused optimizations accelerate CUDA, Vulkan, DX12 and WebGPU
+          backends. PsiTorch is a faster backend for all pyTorch workloads.</p>
         </div>
       </div>
     </div>
@@ -214,7 +219,7 @@
       <p>
         Psilon is under active vibe development. Mac and Linux versions will be
         available soon as well as additional opensource as soon as I get a chance
-        to personally review the code. The best place to reach me personally for
+        to review the code. The best place to reach me for
         business contact is via LinkedIn, or via Discord if you just want to join
         the revolution and help support the project.
       </p>
